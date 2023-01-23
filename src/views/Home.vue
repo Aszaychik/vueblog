@@ -2,6 +2,7 @@
   <div class="home">
     <h1>Home</h1>
     <input type="text" v-model="search" />
+    <button @click="handleClick">Stop</button>
     <div v-for="(name, index) in resultSearch" :key="index">
       {{ name }}
     </div>
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import { computed, ref, watch, watchEffect } from "vue";
 export default {
   name: "Home",
   setup() {
@@ -46,11 +47,24 @@ export default {
       "Anthony",
     ]);
 
+    const stop = watch(search, () => {
+      console.log(`Watch!`);
+    });
+
+    const stopEffect = watchEffect(() => {
+      console.log(`WatchEffect!`, search.value);
+    });
+
+    const handleClick = () => {
+      stop();
+      stopEffect();
+    };
+
     const resultSearch = computed(() => {
       return names.value.filter((name) => name.includes(search.value));
     });
 
-    return { search, names, resultSearch };
+    return { search, names, resultSearch, handleClick };
   },
 };
 </script>
