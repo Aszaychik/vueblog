@@ -1,25 +1,43 @@
 <template>
   <div class="home">
-    <p ref="p">Hi my name is {{ name }}, and this is my number : {{ number }}</p>
+    <h2>Ref</h2>
+    <p ref="p">Hi my name is {{ contactOne.name }}, and this is my number : {{ contactOne.number }}</p>
     <button @click="handleClick">CLick!</button>
-    <button @click="number++">Increment</button>
-    <input type="text" v-model="name" />
+    <button @click="contactOne.number++">Increment</button>
+    <input type="text" v-model="contactOne.name" />
+
+    <h2>Reactive</h2>
+    <p ref="p">Hi my name is {{ contactTwo.name }}, and this is my number : {{ contactTwo.number }}</p>
+    <button @click="handleClick2">CLick!</button>
+    <button @click="contactTwo.number++">Increment</button>
+    <input type="text" v-model="contactTwo.name" />
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 export default {
   name: "HomeView",
   setup() {
     // const p = ref(null);
-    const name = ref("AsZaychik");
-    const number = ref("089519750202");
+    // const name = ref("AsZaychik");
+    // const number = ref("089519750202");
+    const contactOne = ref({ name: "AsZaychik", number: "089519750202" });
+    const contactTwo = reactive({ name: "Yuuka", number: "129472147214" });
+
+    // const handleClick = () => {
+    //   name.value =wekjrhwkrhw "Kayoko";
+    //   number.value = "111001";
+    // };
 
     const handleClick = () => {
-      name.value = "Kayoko";
-      number.value = "111001";
+      contactOne.value.name = "Kayoko";
+      contactOne.value.number = "111001";
+    };
+    const handleClick2 = () => {
+      contactTwo.name = "Noa";
+      contactTwo.number = "1947912471927";
     };
 
     // const handleClick = () => {
@@ -28,13 +46,13 @@ export default {
     //   p.value.textContent = `This is your number : ${number}`;
     // };
 
-    return { name, number, handleClick };
+    return { contactOne, contactTwo, handleClick, handleClick2 };
   },
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .paragraph {
   color: red;
 }
-</style>
+</style> -->
