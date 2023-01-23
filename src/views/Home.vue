@@ -1,70 +1,31 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-    <input type="text" v-model="search" />
-    <button @click="handleClick">Stop</button>
-    <div v-for="(name, index) in resultSearch" :key="index">
-      {{ name }}
-    </div>
+  <div>
+    <!-- <div v-for="randomRef in randomRefs" :key="randomRef.id">
+      <p>ID: {{ randomRef.value.id }}</p>
+      <p>Title: {{ randomRef.value.title }}</p>
+      <p>Body: {{ randomRef.value.body }}</p>
+    </div> -->
+    <PostList :posts="posts" />
   </div>
 </template>
 
 <script>
-import { computed, ref, watch, watchEffect } from "vue";
+import PostList from "../components/PostList.vue";
+import { ref } from "vue";
+
 export default {
-  name: "Home",
+  components: {
+    PostList,
+  },
   setup() {
-    // const name = computed(() => {
-    //   return "AsZaychik";
-    // });
-
-    const search = ref("");
-
-    const names = ref([
-      "Emily",
-      "Michael",
-      "Madison",
-      "Matthew",
-      "Daniel",
-      "Jessica",
-      "Nicholas",
-      "Ashley",
-      "Sarah",
-      "Brandon",
-      "Alyssa",
-      "Jacob",
-      "Samantha",
-      "William",
-      "Jennifer",
-      "Joseph",
-      "Amanda",
-      "Joshua",
-      "Stephanie",
-      "Andrew",
-      "Lauren",
-      "David",
-      "Rachel",
-      "Anthony",
-    ]);
-
-    const stop = watch(search, () => {
-      console.log(`Watch!`);
-    });
-
-    const stopEffect = watchEffect(() => {
-      console.log(`WatchEffect!`, search.value);
-    });
-
-    const handleClick = () => {
-      stop();
-      stopEffect();
-    };
-
-    const resultSearch = computed(() => {
-      return names.value.filter((name) => name.includes(search.value));
-    });
-
-    return { search, names, resultSearch, handleClick };
+    const posts = Array.from({ length: 10 }, () =>
+      ref({
+        id: Math.floor(Math.random() * 100),
+        title: "Title " + Math.floor(Math.random() * 100),
+        body: "Body " + Math.floor(Math.random() * 100),
+      })
+    );
+    return { posts };
   },
 };
 </script>
