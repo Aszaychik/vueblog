@@ -22,9 +22,12 @@ export default {
       ref({
         id: Math.floor(Math.random() * 100),
         title: "Title " + Math.floor(Math.random() * 100),
-        body: "Body " + Math.floor(Math.random() * 100),
+        body:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatibus sint inventore ad tempore, possimus voluptatum nulla neque, quisquam maxime excepturi fugit! Asperiores mollitia nam laboriosam at quae quasi nesciunt? " +
+          Math.floor(Math.random() * 100),
       })
     );
+
     return { posts };
   },
 };
