@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <h2>ID: {{ post.value.id }}</h2> -->
-    <h3>{{ post.value.title }}</h3>
+    <h3>{{ post.title }}</h3>
     <p>{{ snippet }}</p>
   </div>
 </template>
@@ -12,9 +12,9 @@ export default {
   props: ["post"],
   setup(props) {
     const snippet = computed(() => {
-      return props.post.value.body.substring(0, 100) + "...";
+      return props.post.body.substring(0, 100) + "...";
     });
-    console.log(props.post.value.body);
+    // console.log(props.post.value.body);
     return { snippet };
   },
 };

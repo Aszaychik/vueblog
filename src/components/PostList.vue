@@ -11,6 +11,7 @@
 
 <script>
 import PostSingle from "./PostSingle.vue";
+import { onMounted, onUnmounted, onUpdated } from "vue";
 
 export default {
   components: {
@@ -18,8 +19,11 @@ export default {
   },
   props: ["posts"],
   setup(props) {
-    console.log(props.posts);
-    return {};
+    onMounted(() => console.log(`Component Mounted`));
+
+    onUnmounted(() => console.log(`Component onUnmounted`));
+
+    onUpdated(() => console.log(`Component onUpdated`));
   },
 };
 </script>
